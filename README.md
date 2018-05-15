@@ -102,7 +102,7 @@ output:
   }, "SMS")
 
   output:
-  { status: 'success',
+  { stgit checkout masteratus: 'success',
   request: 'modemMode',
   data: 'SMS_Mode' }
 

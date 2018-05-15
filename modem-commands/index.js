@@ -190,8 +190,26 @@ const Modem = function() {
                 sender: newMessage.sender,
                 timeSent: newMessage.time
               }
+              var message = {
+                'seneder': newMessage.sender || null,
+                'message': newMessage.text || null,
+                'dateTimeSent': newMessage.time || null,
+                'dateTimeReceived': new Date(),
+                'header': {
+                  'encoding': newMessage.encodinh || null,
+                  'smsc': newMessage.smsc || null,
+                  'smscType': newMessage.smsc_type || null,
+                  'senderType':newMessage.sender_type || null,
+                  'length': (newMessage.udh && newMessage.udh.length) || null,
+                  'iei': (newMessage.udh && newMessage.udh.iei) || null,
+                  'reference_number': (newMessage.udh && newMessage.udh.reference_number) || null,
+                  'parts': (newMessage.udh && newMessage.udh.parts) || null,
+                  'current_part': (newMessage.udh && newMessage.udh.current_part) || null,
+
+                }
+              }
               modem.emit('onNewMessageIndicator', resultData)
-              modem.emit('onNewMessage', newMessage)
+              modem.emit('onNewMessage', message)
             }
             re.lastIndex = 0 // be sure to reset the index after using .text()
             if ((newpart == ">" || newpart == 'OK') && resultData) {

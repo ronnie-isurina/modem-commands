@@ -1,5 +1,4 @@
 var modem = require('./modem-commands').Modem()
-//19200 // 115200
 let modemOptions = {
   baudRate: 115200,
   dataBits: 8,
@@ -29,7 +28,7 @@ setInterval(() => {
       }
     })
   } else {
-    console.log(`Serial port ${modem.port.path} is open`)
+    // console.log(`Serial port ${modem.port.path} is open`)
   }
 }, 6000)
 
@@ -37,6 +36,7 @@ modem.on('open', (data) => {
   // console.log(data);
 
   modem.initializeModem((response) => {
+
     console.log('response',response)
   })
 
@@ -49,16 +49,19 @@ modem.on('open', (data) => {
     console.log(response)
   }, "PDU")
 
-  for(var i=1;i<=100;i++){
-    modem.sendSMS("09498893309", `Test  ${i}`, function(response){
-      console.log('messgae status',response)
-    })
-  }
+  // for(var i=1;i<=100;i++){
+  //   modem.sendSMS("09498893309", `Happy Mothers Day.. Love you..  ${i}`, function(response){
+  //     console.log('messgae status',response)
+  //   })
+  // }
 
 });
 
 modem.on('onNewMessage', (data) => {
-  console.log(data)
+  console.log('======================================')
+  console.log(`Parts: ${data.header&&data.header['current_part']} of ${data.header&&data.header['parts']}`)
+  console.log('SMS Text: ',data.message)
+  console.log('======================================')
 })
 
 //
