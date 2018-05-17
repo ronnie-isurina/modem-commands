@@ -429,6 +429,24 @@ const Modem = function() {
     }, priority, timeout)
   }
 
+  modem.saveOwnNumber = function(number, callback, priority, timeout) {
+    if (priority == null) priority = false
+    console.log(number)
+    // modem.executeCommand(`AT+CPBS="ON"`, function(data) {
+    //   callback(data)
+    // }, priority, timeout)
+    // modem.executeCommand(`AT+CPBW=?`, function(data) {
+    //   callback(data)
+    // }, priority, timeout)
+    // modem.executeCommand(`AT+CPBR=1`, function(data) {
+    //   callback(data)
+    // }, priority, timeout)
+    //
+    // modem.executeCommand(`+CPBW=1,"18589898844",129,"Jane Smith"`, function(data) {
+    //   callback(data)
+    // }, priority, timeout)
+  }
+
   modem.getModemSerial = function(callback, priority, timeout) {
     if (priority == null) priority = false
     modem.executeCommand('AT+CGSN', function(data) {

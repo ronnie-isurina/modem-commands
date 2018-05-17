@@ -47,12 +47,16 @@ modem.on('open', (data) => {
   // modem.modemMode((response) => {
   //   console.log(response)
   // }, "PDU")
-  modem.getModemSerial((response) => {
-    console.log(response)
-  })
-  modem.getNetworkSignal((response) => {
-    console.log(response)
-  })
+  // modem.getModemSerial((response) => {
+  //   console.log(response)
+  // })
+  // modem.getNetworkSignal((response) => {
+  //   console.log(response)
+  // })
+
+  // modem.saveOwnNumber("09985950851", (response) => {
+  //   console.log(reponse)
+  // });
 
 
 
