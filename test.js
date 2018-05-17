@@ -36,18 +36,22 @@ modem.on('open', (data) => {
   // console.log(data);
 
   modem.initializeModem((response) => {
-
     console.log('response',response)
   })
 
-  modem.deleteAllSimMessages(function(response){
+  // modem.deleteAllSimMessages(function(response){
+  //   console.log(response)
+  // })
+
+/// Change the Mode of the Modem to SMS or PDU (Callback, "SMS"|"PDU")
+  // modem.modemMode((response) => {
+  //   console.log(response)
+  // }, "PDU")
+  modem.getModemSerial((response) => {
     console.log(response)
   })
 
-/// Change the Mode of the Modem to SMS or PDU (Callback, "SMS"|"PDU")
-  modem.modemMode((response) => {
-    console.log(response)
-  }, "PDU")
+
 
   // for(var i=1;i<=100;i++){
   //   modem.sendSMS("09498893309", `Happy Mothers Day.. Love you..  ${i}`, function(response){

@@ -109,6 +109,28 @@ output:
 
 ```
 
+## Get Modem Serial Number
+```
+modem.getModemSerial((response) => {
+  console.log(response)
+})
+
+output:
+{ status: 'success',
+  request: 'getModemSerial',
+  data: { modemSerial: '356995005282463' } }
+
+```
+
+## Send SMS
+```
+   modem.sendSMS("09473625384", `Test Message, function(response){
+     console.log('message status',response)
+   }, true)
+   
+   (number, message, callback, priority)
+```
+
 ## Events
 
 ```

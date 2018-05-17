@@ -139,6 +139,25 @@ const Modem = function() {
             if ((newpart == ">" || newpart =="> " || newpart == 'OK') && resultData) {
               returnResult = true
             }
+          }else if (modem.queue[0] && (modem.queue[0]['command'] == 'AT+CGSN')) { // Query Modem AT to initialize
+            var isSerial = /^\d+$/.test(newpart);
+            if(isSerial){
+              resultData = {
+                status: 'success',
+                request: 'getModemSerial',
+                data: {'modemSerial':newpart}
+              }
+            }
+            if ((newpart == ">" || newpart =="> " || newpart == 'OK') && resultData) {
+              returnResult = true
+            }else if(newpart == 'ERROR'){
+              resultData = {
+                status: 'ERROR',
+                request: 'getModemSerial',
+                data: 'Cant Get Modem Seial Number'
+              }
+              returnResult = true
+            }
           } else if (modem.queue[0] && (modem.queue[0]['command'] == 'AT+CMGF=0') || (modem.queue[0]['command'] == 'AT+CMGF=1')) { // PDU Mode for Modem .. Default PDU Mode to accomodate Long SMS
             if (modem.queue[0]['command'].substr(8, 8) == '0') {
               resultData = {
@@ -388,6 +407,23 @@ const Modem = function() {
       callback(data)
     }, priority, timeout)
   }
+
+  modem.getModemSerial = function(callback, priority, timeout) {
+    if (priority == null) priority = false
+    modem.executeCommand('AT+CGSN', function(data) {
+      callback(data)
+    }, priority, timeout)
+
+  }
+
+  modem.getNetworkSignal = function(callback, priority, timeout) {
+    if (priority == null) priority = false
+    modem.executeCommand('AT+CSQ', function(data) {
+      callback(data)
+    }, priority, timeout)
+
+  }
+
 
   modem.listOpenPorts = function(callback) {
     if (callback === undefined) {
