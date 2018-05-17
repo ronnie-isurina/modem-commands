@@ -121,13 +121,58 @@ output:
   data: { modemSerial: '356995005282463' } }
 
 ```
+## Get Network signal
+```
+modem.getNetworkSignal((response) => {
+  console.log(response)
+})
+
+output:
+{ status: 'success',
+  request: 'getNetworkSignal',
+  data: { signalQuality: '24' } }
+
+
+Value	RSSI dBm	Condition
+2	-109	Marginal
+3	-107	Marginal
+4	-105	Marginal
+5	-103	Marginal
+6	-101	Marginal
+7	-99	Marginal
+8	-97	Marginal
+9	-95	Marginal
+10	-93	OK
+11	-91	OK
+12	-89	OK
+13	-87	OK
+14	-85	OK
+15	-83	Good
+16	-81	Good
+17	-79	Good
+18	-77	Good
+19	-75	Good
+20	-73	Excellent
+21	-71	Excellent
+22	-69	Excellent
+23	-67	Excellent
+24	-65	Excellent
+25	-63	Excellent
+26	-61	Excellent
+27	-59	Excellent
+28	-57	Excellent
+29	-55	Excellent
+30	-53	Excellent
+
+```
+
 
 ## Send SMS
 ```
    modem.sendSMS("09473625384", `Test Message, function(response){
      console.log('message status',response)
    }, true)
-   
+
    (number, message, callback, priority)
 ```
 

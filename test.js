@@ -50,6 +50,9 @@ modem.on('open', (data) => {
   modem.getModemSerial((response) => {
     console.log(response)
   })
+  modem.getNetworkSignal((response) => {
+    console.log(response)
+  })
 
 
 

@@ -93,6 +93,7 @@ const Modem = function() {
       newparts = part.split('\r')
       newparts = part.split('\n')
       newparts.forEach(function(newpart) {
+        console.log(newpart)
         let pduTest = /[0-9A-Fa-f]{6}/g
         if (newpart.substr(0, 6) == '+CMTI:') { // New Message Indicatpr with SIM Card ID, After Recieving Read The DMessage From the SIM Card
           newpart = newpart.split(',')
@@ -138,6 +139,26 @@ const Modem = function() {
             }
             if ((newpart == ">" || newpart =="> " || newpart == 'OK') && resultData) {
               returnResult = true
+            }
+          }else if (modem.queue[0] && (modem.queue[0]['command'] == 'AT+CSQ')) { // Query Modem AT to initialize
+
+            if(newpart.substr(0, 5)=='+CSQ:'){
+              var signal = newpart.split(' ');
+              signal = signal[1].split(',')
+              resultData = {
+                status: 'success',
+                request: 'getNetworkSignal',
+                data: {'signalQuality':signal[0]}
+              }
+            }
+            if ((newpart == ">" || newpart =="> " || newpart == 'OK') && resultData) {
+              returnResult = true
+            }else if(newpart == "ERROR"){
+              resultData = {
+                status: 'ERROR',
+                request: 'getNetworkSignal',
+                data: 'Cant Get Signal'
+              }
             }
           }else if (modem.queue[0] && (modem.queue[0]['command'] == 'AT+CGSN')) { // Query Modem AT to initialize
             var isSerial = /^\d+$/.test(newpart);
