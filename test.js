@@ -33,10 +33,8 @@ setInterval(() => {
 }, 6000)
 
 modem.on('open', (data) => {
-  // console.log(data);
-
   modem.initializeModem((response) => {
-    console.log('response',response)
+    console.log('response:',response)
   })
 
   // modem.deleteAllSimMessages(function(response){

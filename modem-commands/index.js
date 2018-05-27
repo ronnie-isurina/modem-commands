@@ -93,7 +93,6 @@ const Modem = function() {
       newparts = part.split('\r')
       newparts = part.split('\n')
       newparts.forEach(function(newpart) {
-        console.log(newpart)
         let pduTest = /[0-9A-Fa-f]{6}/g
         if (newpart.substr(0, 6) == '+CMTI:') { // New Message Indicatpr with SIM Card ID, After Recieving Read The DMessage From the SIM Card
           newpart = newpart.split(',')
@@ -431,7 +430,6 @@ const Modem = function() {
 
   modem.saveOwnNumber = function(number, callback, priority, timeout) {
     if (priority == null) priority = false
-    console.log(number)
     // modem.executeCommand(`AT+CPBS="ON"`, function(data) {
     //   callback(data)
     // }, priority, timeout)
