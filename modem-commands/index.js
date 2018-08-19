@@ -371,9 +371,9 @@ const Modem = function() {
       if (number && message) {
         let messageID = modem.makeid(25)
         let pduMessage = pdu.generate({
-          text: message,
+          text: `${message}     `,
           receiver: number,
-          encoding: '16bit'
+          encoding: '7bit'
         })
         modem.executeCommand(`AT+CMGS=${(pduMessage.toString().length/2)-1}`, function(data) {}, false, 100);
         modem.executeCommand(`${pduMessage.toString()}`+'\x1a', function(data) {
